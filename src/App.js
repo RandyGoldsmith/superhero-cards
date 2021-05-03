@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+/* eslint-disable no-useless-constructor */
+import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      superheros: []
+    };
+
+    
+  }
+
+  getRandomNumber = () => {
+    return Math.floor((Math.random() * 10) + 1);
+  }
+  
+
+  componentDidMount() {
+    const proxyAPI = 'https://cors-anywhere.herokuapp.com/';
+    const heroAPI = 'https://superheroapi.com/api/10165304001885245/';
+    axios.get(`${proxyAPI}${heroAPI}${this.getRandomNumber()}`)
+    .then(response => console.log(response))
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello Randy</h1>
+      </div>
+    );
+  }
 }
+  
 
 export default App;
