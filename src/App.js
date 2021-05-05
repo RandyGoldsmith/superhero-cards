@@ -1,15 +1,21 @@
 /* eslint-disable no-useless-constructor */
 import React, { Component } from 'react';
-import SingleCard from './components/Card/card-component';
-import { CardDeck } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import CardList from './components/CardList/card-list-component'
 import axios from 'axios';
 
 
 
+
 class App extends Component {
-  
+  constructor() {
+    super();
+    this.state = {
+      heroes: []
+    }
+  }
+
 
 
   getRandomNumber = () => {
@@ -18,19 +24,17 @@ class App extends Component {
   
 
   componentDidMount() {
-    const proxyAPI = 'https://cors-anywhere.herokuapp.com/';
-    const heroAPI = 'https://superheroapi.com/api/10165304001885245/';
-    axios.get(`${proxyAPI}${heroAPI}${this.getRandomNumber()}`)
-    .then(response => console.log(response))
+    //const proxyAPI = 'https://cors-anywhere.herokuapp.com/';
+    const heroAPI = 'http://private-anon-3ee6a03d25-superheroes.apiary-mock.com/characters/';
+    axios.get(`${heroAPI}`)
+    .then(response => this.setState({ heroes: response.data.Characters}))
   }
 
   render() {
+
+
     return (
-      <CardDeck style={{ margin: '10px'}}>
-        <SingleCard />
-        <SingleCard />
-        <SingleCard />
-      </CardDeck>
+        <CardList heroes={this.state.heroes}/>
     );
   }
 }
