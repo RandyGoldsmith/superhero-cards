@@ -1,18 +1,16 @@
 /* eslint-disable no-useless-constructor */
 import React, { Component } from 'react';
+import SingleCard from './components/Card/card-component';
+import { CardDeck } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import axios from 'axios';
 
+
+
 class App extends Component {
-  constructor() {
-    super();
+  
 
-    this.state = {
-      superheros: []
-    };
-
-    
-  }
 
   getRandomNumber = () => {
     return Math.floor((Math.random() * 10) + 1);
@@ -28,9 +26,11 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Hello Randy</h1>
-      </div>
+      <CardDeck style={{ margin: '10px'}}>
+        <SingleCard />
+        <SingleCard />
+        <SingleCard />
+      </CardDeck>
     );
   }
 }
